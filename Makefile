@@ -65,11 +65,13 @@ lint: clean flake8 mypy
 lint-strict: clean
 	@echo "$(YELLOW)Checking with flake8 and mypy --strict...$(DEF_COLOR)"
 	@flake8_status=0; mypy_status=0; \
+	echo "\n- Running flake8..."; \
 	uv run flake8 $(MAIN_FILE) $(SRC) || flake8_status=$$?; \
+	echo "\n- Running mypy..."; \
 	uv run mypy $(MAIN_FILE) $(SRC) --strict --follow-imports=silent \
 	--follow-untyped-imports || mypy_status=$$?; \
-#	if [ $$flake8_status -ne 0 ]; then echo "$(RED)flake8 failed$(DEF_COLOR)"; fi; \
-#	if [ $$mypy_status -ne 0 ]; then echo "$(RED)mypy failed$(DEF_COLOR)"; fi; \
+	if [ $$flake8_status -ne 0 ]; then echo "$(RED)\nflake8 failed$(DEF_COLOR)"; fi; \
+	if [ $$mypy_status -ne 0 ]; then echo "$(RED)\nmypy failed$(DEF_COLOR)"; fi; \
 	if [ $$flake8_status -ne 0 ] || [ $$mypy_status -ne 0 ]; then exit 1; fi; \
 	echo "$(GREEN)Lint-strict passed!!$(DEF_COLOR)"
 
