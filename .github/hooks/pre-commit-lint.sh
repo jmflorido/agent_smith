@@ -16,16 +16,5 @@ if ! make lint-strict; then
         exit 1
 fi
 
-# echo -e "${GREEN}✅ Lint-strict passed!${DEF_COLOR}"
-# echo ""
-
-# echo -e "${YELLOW} Creating the package with uv build...${DEF_COLOR}"
-# # Ejecuta uv build
-# if ! uv build; then
-#       echo -e "${RED}❌ Build process failed!! Commit blocked.${DEF_COLOR}"
-#       exit 2
-# fi
-
-# echo -e "${GREEN}✅ Build successful!${DEF_COLOR}"
 echo -e "${GREEN}✅ All checks passed! Commit allowed.${DEF_COLOR}"
 exit 0

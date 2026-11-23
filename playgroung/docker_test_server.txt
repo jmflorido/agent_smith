@@ -1,0 +1,1 @@
+docker run --rm -it --network host node:22-alpine npx -y @modelcontextprotocol/inspector
