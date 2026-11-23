@@ -30,10 +30,25 @@ def subtract(a: int, b:int) -> int:
     """
     return a - b
 
-@mcp.resource("greeting://{name}")
-def greeting(name: str) -> str:
+@mcp.tool()
+def greeting_formal(name: str) -> str:
     """Greet someone by name."""
     return f"Hello, {name}!"
+
+
+@mcp.tool()
+def greeting_street_style(name: str) -> str:
+    """Greet someone by name."""
+    return f"Eyyyy, watsup {name}!!!"
+
+
+@mcp.prompt()
+def greeting(name: str) -> str:
+    """Generates a message asking for a greeting"""
+    return f"""
+        Return a greeting message for a user called '{name}'. 
+        if the user is called 'Laurent', use a formal style, else use a street style.
+        """
 
 if __name__ == "__main__":
     mcp.run(transport="streamable-http")   # http://127.0.0.1:8000/mcp
