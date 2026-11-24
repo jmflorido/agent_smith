@@ -51,4 +51,5 @@ def greeting(name: str) -> str:
         """
 
 if __name__ == "__main__":
-    mcp.run(transport="streamable-http")   # http://127.0.0.1:8000/mcp
+    # mcp.run(transport="streamable-http")   # http://127.0.0.1:8000/mcp
+    mcp.run(transport="stdio")
