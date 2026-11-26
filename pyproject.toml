@@ -7,5 +7,6 @@ requires-python = ">=3.13"
 dependencies = [
     "icecream>=2.2.0",
     "mcp[cli]>=2.3.0",
+    "openai>=3.60.0",
     "pre-commit>=4.7.0",
 ]
