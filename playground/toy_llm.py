@@ -44,6 +44,14 @@ class LLMProvider:
 PROVIDERS = [
     LLMProvider(
         sdk="openai",
+        provider="openrouter",
+        base_url="https://openrouter.ai/api/v1",
+        api_key=os.getenv("OPENROUTER_API_KEY"),
+        model="nvidia/nemotron-3-ultra-550b-a55b:free",
+        extra_body={"reasoning": {"enabled": False}}
+        ),
+    LLMProvider(
+        sdk="openai",
         provider="google",
         base_url="https://generativelanguage.googleapis.com/v1beta/openai",
         api_key=os.getenv("GEMINI_API_KEY"),
@@ -65,14 +73,6 @@ PROVIDERS = [
         api_key=os.getenv("GROQ_API_KEY"),
         model="openai/gpt-oss-120b",
         extra_body={"reasoning_effort": "low"}
-        ),
-    LLMProvider(
-        sdk="openai",
-        provider="openrouter",
-        base_url="https://openrouter.ai/api/v1",
-        api_key=os.getenv("OPENROUTER_API_KEY"),
-        model="nvidia/nemotron-3-ultra-550b-a55b:free",
-        extra_body={"reasoning": {"enabled": False}}
         ),
         # LLMProvider(
         #     sdk="openai",
@@ -126,7 +126,9 @@ def get_answer(input_msg: str) -> None:
             )
             response = client.chat.completions.create(
                 model=llm.model,
-                messages=[{"role": "user", "content": input_msg}],
+                messages=[
+                    {"role": "developer", "content": "Talk like a pirate."},
+                    {"role": "user", "content": input_msg}],
                 # max_tokens=250,
                 extra_body=llm.extra_body,
             )
@@ -150,7 +152,7 @@ def get_answer(input_msg: str) -> None:
 
     
 response = get_answer(input_msg="What is a RAG?")
-ic(response)
+# ic(response)
 ic(response.choices[0].message.content)
 # print("===" * 30)
 # print("\n\n")
